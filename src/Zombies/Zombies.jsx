@@ -14,8 +14,8 @@ export const Zombies = () => {
             {current.matches('locked') && <Locked send={send} current={current}/>}
             {current.matches('open') && <Open send={send} current={current}/>}
             <p>
-                <span>Zombie Count: </span>
-                <b>{current.context.zombies}</b>
+                <span>Zombies escaped: </span>
+                <b>{1000 - current.context.zombies}/1000</b>
             </p>
         </div>);
 }

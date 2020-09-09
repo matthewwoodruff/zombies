@@ -41,10 +41,7 @@ export const zombieMachine = Machine({
                 on: {
                     CLOSE: [
                         {
-                            cond: (context, event) => {
-                                const thing = context.door_gap - (event.amount ?? context.door_gap) > 0
-                                return thing
-                            },
+                            cond: (context, event) => context.door_gap - (event.amount ?? context.door_gap) > 0,
                             actions: assign({door_gap: (context, event) => context.door_gap - (event.amount ?? context.door_gap)}),
                         },
                         {
