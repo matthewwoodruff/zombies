@@ -2,7 +2,7 @@ import {assign, Machine, send} from "xstate";
 
 export const zombieMachine = Machine({
 
-        id: 'Cell Door',
+        id: 'Armoured Door',
         initial: 'closed',
         context: {
             zombies: 1000,
@@ -54,7 +54,6 @@ export const zombieMachine = Machine({
                         }
                     ]
                 },
-
                 states: {
                     alarm: {
                         initial: 'on',
@@ -144,9 +143,7 @@ export const zombieMachine = Machine({
     {
         activities: {
             beeping: () => {
-
-                const interval = setInterval(() => console.log('Beep'), 500);
-
+                const interval = setInterval(() => console.log('Beep'), 1000);
                 return () => clearInterval(interval);
             }
         }
