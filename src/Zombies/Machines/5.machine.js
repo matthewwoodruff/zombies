@@ -1,6 +1,5 @@
-import {assign, Machine, send} from "xstate";
 
-export const zombieMachine = Machine({
+const zombieMachine = Machine({
         id: 'Armoured Door',
         initial: 'closed',
         context: {
@@ -55,11 +54,6 @@ export const zombieMachine = Machine({
                         initial: 'on',
                         states: {
                             on: {
-                                after: {
-                                    2000: {
-                                        actions: send('NOTIFY_GUARD')
-                                    }
-                                },
                                 activities: ['beeping'],
                                 on: {
                                     DEACTIVATE: 'off',
@@ -109,29 +103,6 @@ export const zombieMachine = Machine({
                             }
                         }
                     },
-                    guard: {
-                        initial: 'idle',
-                        states: {
-                            idle: {
-                                on: {
-                                    NOTIFY_GUARD: 'closingDoor'
-                                }
-                            },
-                            closingDoor: {
-                                invoke: {
-                                    id: 'closeDoor',
-                                    src: (context, event) => (callback, onReceive) => {
-
-                                        const id = setInterval(() => {
-                                            callback({type: 'CLOSE', amount: 10})
-                                        }, 1000);
-
-                                        return () => clearInterval(id);
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
             },
         }
