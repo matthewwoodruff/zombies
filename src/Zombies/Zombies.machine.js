@@ -1,7 +1,6 @@
 import {assign, Machine, send} from "xstate";
 
 export const zombieMachine = Machine({
-
         id: 'Armoured Door',
         initial: 'closed',
         context: {
