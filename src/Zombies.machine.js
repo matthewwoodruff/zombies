@@ -5,7 +5,7 @@ export const zombieMachine = Machine({
         id: 'Cell Door',
         initial: 'closed',
         context: {
-            criminals: 1000,
+            zombies: 1000,
             door_gap: 0,
         },
         states: {
@@ -77,7 +77,7 @@ export const zombieMachine = Machine({
                             }
                         }
                     },
-                    criminals: {
+                    zombies: {
                         initial: 'escaping',
                         states: {
                             escaping: {
@@ -86,25 +86,25 @@ export const zombieMachine = Machine({
                                     src: (context, event) => (callback, onReceive) => {
 
                                         const id = setInterval(() => {
-                                            callback('CRIMINAL_ESCAPED')
+                                            callback('ZOMBIE_ESCAPED')
                                         }, 1000);
 
                                         return () => clearInterval(id);
                                     }
                                 },
                                 on: {
-                                    CRIMINAL_ESCAPED: [
+                                    ZOMBIE_ESCAPED: [
                                         {
-                                            cond: context => context.criminals > 0,
+                                            cond: context => context.zombies > 0,
                                             actions: [
-                                                assign({criminals: context => Math.max(context.criminals - context.door_gap, 0)})
+                                                assign({zombies: context => Math.max(context.zombies - context.door_gap, 0)})
                                             ]
                                         },
                                     ],
                                     '': [
                                         {
                                             target: 'escaped',
-                                            cond: context => context.criminals === 0
+                                            cond: context => context.zombies === 0
                                         }
                                     ]
                                 }
