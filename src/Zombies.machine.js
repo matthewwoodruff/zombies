@@ -1,6 +1,6 @@
-import {Machine} from "xstate";
+import {assign, Machine, send} from "xstate";
 
-const zombieMachine = Machine({
+export const zombieMachine = Machine({
 
         id: 'Cell Door',
         initial: 'closed',
