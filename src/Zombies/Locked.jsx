@@ -2,7 +2,7 @@ import React from "react";
 
 export const Locked = ({current, send}) => {
     return <>
-        <h2>Locked</h2>
+        <h2>Door Locked</h2>
 
         {current.matches('locked.main') &&
         <>
