@@ -97,7 +97,7 @@ export const zombieMachine = Machine({
                                         {
                                             cond: context => context.zombies > 0,
                                             actions: [
-                                                assign({zombies: context => Math.max(context.zombies - context.door_gap, 0)})
+                                                assign({zombies: context => Math.max(Math.floor(context.zombies - (context.door_gap / 2)), 0)})
                                             ]
                                         },
                                     ],
@@ -128,7 +128,7 @@ export const zombieMachine = Machine({
                                     src: (context, event) => (callback, onReceive) => {
 
                                         const id = setInterval(() => {
-                                            callback({type: 'CLOSE', amount: 25})
+                                            callback({type: 'CLOSE', amount: 10})
                                         }, 1000);
 
                                         return () => clearInterval(id);

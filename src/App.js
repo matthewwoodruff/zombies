@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Zombies} from "./Zombies";
+import {Zombies} from "./Zombies/Zombies";
 
 function App() {
   return (
